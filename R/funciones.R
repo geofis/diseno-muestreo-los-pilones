@@ -27,6 +27,21 @@ a <- map_dfr(d$index[1:10], function(x) {
   return(r)
 })
 
+
+a <- map_dfr(ind_esp$h3_address, function(x) {
+  r <- ind_esp[ind_esp$h3_address == x,] %>% st_cast('POINT') %>%
+    st_geometry() %>%
+    st_nearest_points(ind_esp[ind_esp$h3_address == x,] %>% st_centroid()) %>%
+    st_as_sf() %>% 
+    st_set_geometry('geometry')
+  r$index <- x
+  return(r)
+})
+
+# library(stplanr)
+# line_segment(a, segment_length = units(10, 'm'))
+st_line_sample(a %>% st_transform(32619), density = set_units(10, 'm')) %>% st_transform(4326) %>% st_write('sep-10-metros.kml')
+
 generar_radiales <- function(objeto_espacial = NULL, columna_indice = NULL) {
   objeto_interno <- objeto_espacial %>% st_geometry()
   objeto_interno$indice <- objeto_interno[, columna_indice, drop=T] %>% st_drop_geometry()
