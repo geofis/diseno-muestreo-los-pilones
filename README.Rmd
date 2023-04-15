@@ -1,5 +1,5 @@
 ---
-title: "Diseño de muestreo mediante índice espacial en Los Pilones / Los Boquerones <br> Asignaturas biogeografía y geomorfología, UASD"
+title: "Diseño de muestreo mediante índice espacial en Los Pilones / Los Boquerones para prácticas de cmapo <br> Asignaturas biogeografía y geomorfología, UASD"
 author: José Ramón Martínez Batlle
 output:
   # bookdown::github_document2:
@@ -19,6 +19,7 @@ always_allow_html: true
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
+  # cache = TRUE,
   echo = TRUE,
   message=FALSE,
   warning=FALSE)
@@ -62,7 +63,7 @@ ind_esp_ord <- ind_esp_ord %>%
   mutate(id_alfanum = paste0('h',
                              stri_pad_left(as.character(id_num),
                                            max(nchar(id_num)), 0)))
-ind_esp_ord %>% ggplot + aes(label = id_alfanum) +
+ind_esp_ord_sin_radios_mapa <- ind_esp_ord %>% ggplot + aes(label = id_alfanum) +
   geom_sf() + theme_bw() + geom_sf_text(size = 2) +
   scale_x_continuous(breaks = round(range(st_coordinates(ind_esp_ord)[,'X']), 3))
 # st_write(ind_esp_ord, 'fuentes/ordenados.gpkg', delete_dsn = T)
@@ -71,7 +72,7 @@ ind_esp_ord %>% ggplot + aes(label = id_alfanum) +
 
 # Generar radios
 radios <- generar_radios(ind_esp_ord, 'id_alfanum')
-ind_esp_ord %>% ggplot + aes(label = id_alfanum, colour = id_alfanum) +
+ind_esp_ord_con_radios_mapa <- ind_esp_ord %>% ggplot + aes(label = id_alfanum, colour = id_alfanum) +
   geom_sf() +
   geom_sf(data = radios, aes(colour = id_alfanum)) +
   geom_sf_text(size = 3, colour = 'black') +
@@ -81,4 +82,151 @@ ind_esp_ord %>% ggplot + aes(label = id_alfanum, colour = id_alfanum) +
 # st_write(radios, 'fuentes/radios.gpkg', delete_dsn = T)
 
 # Clasificar hexágonos en función de si están en ortofoto o fuera de ella
+###########################
+
 ```
+
+# Logística básica de la salida de campo
+
+## Fecha, hora, lugar
+
+-   Fecha: domingo 16 de abril.
+
+-   Hora: debes llegar, como muy tarde, a las 5.45 am.
+
+-   Lugar de salida: Aula Magna, Campus Central.
+
+-   Lugar de destino: Los Pilones (río Ocoa), Boquerón, Ocoa. Este es el destino principal, donde colectaremos nuestros datos. Al terminar, haremos un recorrido en autobús hacia Ocoa, con paradas en la carretera (más detalles sobre paradas, abajo)
+
+-   Podrás disponer de avituallamiento de emergencia (si no pudiste llevar comida) en el Parador Cruce de Ocoa (a la ida).
+
+## ¿Qué llevar?
+
+### Generales
+
+-   **¡Mucha (pero mucha) agua potable!**
+
+-   **Protección contra el sol (protector solar en crema, camisa manga larga, sombrero, ¡TODO es útil!). ¡HARÁ MUCHO SOL!**
+
+-   **Comida** (llevarla puesta, es decir, lista para abrir y comer en cualquier lugar y momento).
+
+-   Repelente. No suele haber mosquitos, pero no está de más llevarlo por si acaso.
+
+-   Por supuesto no hay "código de vestimenta", sólo considera lo siguiente. Usa pantalón largo de tela fuerte y fresca para evitar "puyones". El pantalón corto se desaconseja, pues  te expondrá a espinas y picaduras de insectos.
+
+-   **Celular**
+
+    - Android. Descargar la aplicación [ODK Collect](https://play.google.com/store/apps/details?id=org.odk.collect.android) desde el Play Store.
+    
+    - iPhone. Descargar GIC Collect. No he probado esta aplicación, por lo que es importante que realices tus propias pruebas (ver punto siguiente)
+
+    - Configurar y probar. Configurar la aplicación ODK Collect o GIC Collect con los detalles que habrás recibido vía correo electrónico. Descarga el formulario que te corresponda (Biogeografía o Geomorfología) presionando "Obtener formulario en blanco". A continuación, haz una prueba intentando llenar (sin enviar) un formulario nuevo, para lo cual dirígite a "Llenar Nuevo Formulario", presionar sobre el nombre del formulario y comenzar a rellenar. Esta prueba te servirá para conocer, a priori, el contenido que rellenarás en terreno. Más detalles, en tutorial.
+
+-   Calzado apropiado. El río Ocoa, a su paso por Los Pilones / Los Boquerones, normalmente no lleva mucha agua, pero ya comenzó la temporada húmeda, por lo que, probablemente, algo de caudal tendrá. Tus sitios de muestreo \"caerán donde caigan\", y la probabilidad de que tengas que atravesar el río es bastante elevada. Lleva el calzado con el que te sientas cómodo/a, pero que a la vez te sirva para vadear el río.
+
+-   ¿Te dije ya que llevaras mucha agua y forma de protegerte del sol? Pues por si lo olvidé, lleva mucha agua y protégete del sol.
+
+### Específico para **geomorfología**
+
+-   Cinta métrica de 3 o de 5 metros máximo (la que tengas), con marcas de centímetros y milímetros.
+
+-   Calibrador pie de rey (caliper), pero puedes prescindir de él si llevas cinta métrica.
+
+-   Ácido muriático (preferiblemente, en pequeño frasco con gotero). Si es de vidrio, cubre el frasco con algo acolchado (e.g. una media) para evitar su rotura.
+
+### Específico para **biogeografía**
+
+-   Seis frascos de compota + 2 pares de medias (usarás las medias en el campo para proteger los frascos de posibles roturas).
+
+-   Si no puedes adquirir envases de compota, pueden ser de otro tipo, pero asegúrate de que cumplan las siguientes características: de boca ancha, de vidrio, de cierre hermético.
+
+-   Llevaré alguna solución de conservación, que puede ser cualquiera de las siguientes, pero si tienes alguna, llévala.
+
+    -   Alcohol etílico (está caro y escaso).
+
+    -   Alcohol isopropílico, que destruye (con el tiempo) las muestras, pero las conserva bien si sólo pasan unos pocos días.
+
+    -   "Romo" (blanco). Tiene baja concentración para conservar animales, pero es mejor que nada (mucho mejor que el agua).
+
+### Recomendados
+
+-   Funda impermeable para celular.
+
+-   Chaleco reflector.
+
+# Seguridad, riesgos, situaciones de emergencia
+
+Los riesgos asociados al viaje de campo son los mismos que en cualquier otro. Considera las siguientes medidas de seguridad:
+
+- Notifica al menos un contacto de emergencia a tus compañeros y compañeras.
+
+- Si sufres de alguna condición de salud que consideres importante notificar, indicáselo al profesor.
+
+- Si vas a entrar o traspasar propiedad privada, pide permiso a las personas en el lugar. Esto aplica especialmente en los hexágonos **h02**, **h25** y **h43**.  Si no encuentras personas en el lugar para gestionar el permiso, entonces no entres ni atravieses la propiedad en cuestión. En los demás hexágonos, aunque podrías encontrar cercas y alambres de púa, no se trata de propiedad privada estrictamente (e.g. hexágonos **h22**, **h26**, y otros), pues se trata de área dentro del cauce del río que forman parte del dominio público.
+
+El entorno donde trabajaremos es el cauce de un río, con matorral y bosque seco, por lo que debes considerar las siguientes medidas adicionales:
+
+- Aunque el lugar es seco, y el río está normalmente dentro de canales muy bien delimitados y conocidos, si comienza fluir agua por canales que, a nuestra llegada, se encontraban secos, deberás dirigirte de inmediato al punto de encuentro o, en su defecto, al lugar donde nos haya dejado el autobús. Notifica a tus compañeros y compañeras sobre tu situación.
+
+- No todas las especies de plantas tienen espinas, pero casi todas. De manera general, toma precauciones adicionales al pasar la mano cerca del suelo o al caminar entre el matorral; es por esto que no se recomienda pantalón corto. No agarres de tallos o troncos sin antes inspeccionarlos. Y tampoco satanices a estas dos amigas que te presento a continuación, pero respétalas:
+
+| Guasábara | Guao |
+|:--:|:--:|
+|![](img/Cylindropuntia_caribaea.jpg) | ![](img/Comocladia_dodonaea_1.JPG)|
+*Cylindropuntia caribaea* (Britton & Rose) F.M.Knuth. Probabilidad de encontrarla: muy alta.   <a href="https://commons.wikimedia.org/wiki/User:CactiLegacy">CactiLegacy</a>, <a href="https://commons.wikimedia.org/wiki/File:Cylindropuntia_caribaea.jpg">Cylindropuntia caribaea</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode" rel="license">CC BY-SA 4.0</a> | *Comocladia dodonaea* Britton. Probabilidad de encontrarla: media.  <a href="https://commons.wikimedia.org/wiki/User:Xemenendura">Xemenendura</a>, <a href="https://commons.wikimedia.org/wiki/File:Comocladia_dodonaea_1.JPG">Comocladia dodonaea 1</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/legalcode" rel="license">CC BY-SA 3.0</a> |
+
+# Diseño de muestreo, procedimiento, asignaciones
+
+## Biogeografía
+
+### Objetivo
+
+Colectar hormigas que habitan en el suelo, árboles, arbustos y herbáces, mediante búsqueda "semilibre" siguiendo un diseño muestreo de preestablecido, en áreas sin vegetación, en matorral y bosque perturbado, dentro de un tramo del cauce del río Ocoa en su zona de sedimentación.
+
+### Procedimiento básico
+
+
+
+### Mapa del diseño de muestreo
+
+> IMPORTANTE: cuando dispongas de internet, descárgalo en tu celular y conserva una copia para uso sin conexión. En el área hay conectividad, pero es preferible contar adicionalmente con una versión alojada en el teléfono.
+
+<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1mT0xjNIGA2SoPgWzb-qhwi6nZQs-T9k&ehbc=2E312F" width="640" height="480"></iframe>
+
+
+
+## Geomorfología
+
+
+
+
+# Aplicaciones y servicios útiles, mezclados, para geomorfología y biogeografía
+
+- GoogleMaps. La necesitarás sí o sí. Te dejo el vínculo del mapa en  [GoogleMaps](https://www.google.com/maps/d/viewer?mid=1mT0xjNIGA2SoPgWzb-qhwi6nZQs-T9k)
+
+- Mapas en el celular (muchas herramientas disponibles): [OruxMaps](https://www.oruxmaps.com/cs/es)
+
+- Guardar el trayecto: [GPS Logger](https://play.google.com/store/apps/details?id=eu.basicairdata.graziano.gpslogger)
+
+- Mapas en el celular: [Mapit GIS](https://play.google.com/store/apps/details?id=com.osedok.gisdatacollector)
+
+- Mapas en el celular: [SW Maps](https://play.google.com/store/apps/details?id=np.com.softwel.swmaps)
+
+- Para identificación de especies, reporte, ciencia ciudadana. Créate una cuenta: [iNaturalist](https://www.inaturalist.org/)
+
+- Para identificación de especies: [Picture This]()
+
+- Ciencia ciudadana, monitoreo y conservaciónde bosque: [Forest Watcher]()
+
+- Ciencia ciudadana: [iTree](https://www.itreetools.org/)
+
+- Predice la flora probable de un lugar. [Pl\@ntNet](https://identify.plantnet.org/)
+
+- Lista exhaustiva de plantas, nombres: [World Flora Online (WFO) Plant List](https://wfoplantlist.org/plant-list)
+
+
+
+# Tutoriales
+
+# Paradas
+
