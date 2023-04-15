@@ -28,6 +28,8 @@ a <- map_dfr(d$index[1:10], function(x) {
 })
 
 generar_radiales <- function(objeto_espacial = NULL, columna_indice = NULL) {
+  library(sf)
+  library(tidyverse)
   objeto_interno <- objeto_espacial %>% st_geometry()
   objeto_interno$indice <- objeto_interno[, columna_indice, drop=T] %>% st_drop_geometry()
   return(objeto_interno)

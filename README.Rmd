@@ -24,16 +24,19 @@ library(units)
 ## Índice espacial en área de interés (AOI)
 
 ```{r}
+aoi <- st_read('fuentes/aoi-extendida.gpkg')
 aoi <- st_read('fuentes/aoi.gpkg')
 plot(aoi)
-aoi_extra <- st_buffer(aoi, dist = set_units(50, m))
-plot(aoi_extra, add = T)
 resolucion <- 10
-ind_esp <- polygon_to_cells(aoi_extra, res = resolucion, simple = FALSE)
+ind_esp <- polygon_to_cells(aoi, res = resolucion, simple = FALSE)
 ind_esp <- cell_to_polygon(unlist(ind_esp$h3_addresses), simple = FALSE)
 plot(aoi_extra)
-plot(aoi, add = T)
+plot(aoi)
 plot(ind_esp %>% st_geometry(), add = T)
+st_write(ind_esp, 'fuentes/h3-resolucion-10.gpkg', delete_dsn = T)
+```
+
+```{r}
 
 ```
 
