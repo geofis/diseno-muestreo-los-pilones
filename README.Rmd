@@ -1,31 +1,45 @@
 ---
 title: "Diseño de muestreo mediante índice espacial en Los Pilones / Los Boquerones <br> Asignaturas biogeografía y geomorfología, UASD"
 author: José Ramón Martínez Batlle
-output: github_document
+output:
+  # bookdown::github_document2:
+  #   number_sections: false
+  #   fig_caption: yes
+  bookdown::html_document2:
+    number_sections: false
+    code_folding: hide
+    fig_caption: yes
+    md_extensions: "-fancy_lists"
+    includes:
+      in_header: GA_Script.html
 editor_options: 
   chunk_output_type: console
+always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message=FALSE,
+  warning=FALSE)
 ```
 
-Paquetes
 
 ```{r}
+# Paquetes
 library(sf)
 library(tidyverse)
 library(kableExtra)
 library(h3jsr)
 library(mapview)
 library(units)
+library(stringi)
+source('R/funciones.R')
 ```
 
-## Índice espacial en área de interés (AOI)
-
-```{r}
+```{r, eval=F}
+# Índice espacial en área de interés extendida (abarca ortofoto y área externa)
 aoi <- st_read('fuentes/aoi-extendida.gpkg')
-# aoi <- st_read('fuentes/aoi.gpkg')
 plot(aoi)
 resolucion <- 10
 ind_esp <- polygon_to_cells(aoi, res = resolucion, simple = FALSE)
@@ -33,10 +47,38 @@ ind_esp <- cell_to_polygon(unlist(ind_esp$h3_addresses), simple = FALSE)
 plot(aoi_extra)
 plot(aoi)
 plot(ind_esp %>% st_geometry(), add = T)
-st_write(ind_esp, 'fuentes/h3-resolucion-10.gpkg', delete_dsn = T)
+# st_write(ind_esp, 'fuentes/h3-resolucion-10.gpkg', delete_dsn = T)
 ```
 
 ```{r}
+# Renombrar índice usando direcciones cardinales
+# Cargar índice desde archivo.
+# Si se necesita un nuevo índice, entonces modificar el bloque de código anterior
+ind_esp <- st_read('fuentes/h3-resolucion-10.gpkg', quiet = T)
+ind_esp_xy <- st_coordinates(st_centroid(ind_esp))
+ind_esp_ord <- ind_esp[order(ind_esp_xy[,"Y"], ind_esp_xy[,"X"], decreasing = T),]
+ind_esp_ord$id_num <- 1:nrow(ind_esp_ord)
+ind_esp_ord <- ind_esp_ord %>%
+  mutate(id_alfanum = paste0('h',
+                             stri_pad_left(as.character(id_num),
+                                           max(nchar(id_num)), 0)))
+ind_esp_ord %>% ggplot + aes(label = id_alfanum) +
+  geom_sf() + theme_bw() + geom_sf_text(size = 2) +
+  scale_x_continuous(breaks = round(range(st_coordinates(ind_esp_ord)[,'X']), 3))
+# st_write(ind_esp_ord, 'fuentes/ordenados.gpkg', delete_dsn = T)
+# st_write(ind_esp_ord %>% st_cast('LINESTRING'), 'fuentes/ordenados-lineas.gpkg', delete_dsn = T)
+# st_write(ind_esp_ord %>% st_centroid, 'fuentes/centroides.gpkg', delete_dsn = T)
 
+# Generar radios
+radios <- generar_radios(ind_esp_ord, 'id_alfanum')
+ind_esp_ord %>% ggplot + aes(label = id_alfanum, colour = id_alfanum) +
+  geom_sf() +
+  geom_sf(data = radios, aes(colour = id_alfanum)) +
+  geom_sf_text(size = 3, colour = 'black') +
+  theme_bw() + 
+  theme(legend.position = 'none') +
+  scale_x_continuous(breaks = round(range(st_coordinates(ind_esp_ord)[,'X']), 3))
+# st_write(radios, 'fuentes/radios.gpkg', delete_dsn = T)
+
+# Clasificar hexágonos en función de si están en ortofoto o fuera de ella
 ```
-
