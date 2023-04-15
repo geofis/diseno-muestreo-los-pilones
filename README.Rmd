@@ -25,7 +25,7 @@ library(units)
 
 ```{r}
 aoi <- st_read('fuentes/aoi-extendida.gpkg')
-aoi <- st_read('fuentes/aoi.gpkg')
+# aoi <- st_read('fuentes/aoi.gpkg')
 plot(aoi)
 resolucion <- 10
 ind_esp <- polygon_to_cells(aoi, res = resolucion, simple = FALSE)
