@@ -165,7 +165,7 @@ Y esta otra captura es una animación alternante de la ortofoto ("la imagen real
 
     -   Configurar y probar. Configurar la aplicación ODK Collect o GIC Collect con los detalles que habrás recibido vía correo electrónico. Descarga el formulario que te corresponda (Biogeografía o Geomorfología) presionando "Obtener formulario en blanco". A continuación, haz una prueba intentando llenar (sin enviar) un formulario nuevo, para lo cual dirígite a "Llenar Nuevo Formulario", presionar sobre el nombre del formulario y comenzar a rellenar. Esta prueba te servirá para conocer, a priori, el contenido que rellenarás en terreno. Más detalles, en el tutorial correspondiente de [Biogeografía](https://www.youtube.com/watch?v=KMKJ8tsO1PY) y de Geomorfología
 
--   Calzado apropiado. El río Ocoa, a su paso por Los Pilones / Los Boquerones, normalmente no lleva mucha agua, pero ya comenzó la temporada húmeda, por lo que, probablemente, algo de caudal tendrá. Tus sitios de muestreo "caerán donde caigan", y la probabilidad de que tengas que atravesar el río es bastante elevada. Lleva el calzado con el que te sientas cómodo/a, pero que a la vez te sirva para vadear el río.
+-   Calzado apropiado. El río Ocoa, a su paso por Los Pilones / Los Boquerones, normalmente no lleva mucha agua, pero ya comenzó la temporada húmeda, por lo que, probablemente, tenga algo de caudal. Tus sitios de muestreo "caerán donde caigan", y la probabilidad de que tengas que atravesar el río es bastante elevada. Lleva el calzado con el que te sientas cómodo/a, pero que a la vez te sirva para vadear el río.
 
 -   ¿Te dije ya que llevaras mucha agua y forma de protegerte del sol? Pues por si lo olvidé, lleva mucha agua y protégete del sol.
 
@@ -297,7 +297,9 @@ Si no lo has hecho aún, abre tu celular, actívale el GPS, y otórgale permisos
 
 12. Cuando alcances la última colecta en el último radio, podrás cerrar el formulario. Para ello, presiona "Siguiente", responde "No agregar" cuando pregunte si deseas agregar nueva colecta.
 
-13. La última pregunta del formulario es sobre observaciones. Si tienes alguna que añadir, este es el momento. De lo contrario, presiona siguiente y guarda tu formulario. Puedes marcarlo como finalizado y enviarlo si lo deseas. También puede desmarcar la casilla de "Finalizado", si tienes previsto revisarlo más adelante. Presiona guardar y el formulario se cerrará. En el último radio, cierra el formulario y continúa al hexágono siguiente asignado.
+13. La última pregunta del formulario es sobre observaciones. Si tienes alguna que añadir, este es el momento. De lo contrario, presiona siguiente y guarda tu formulario. Puedes marcarlo como finalizado y enviarlo si lo deseas. También puede desmarcar la casilla de "Finalizado", si tienes previsto revisarlo más adelante; pero no olvides subir tu formulario al servidor tan pronto como puedas. Presiona guardar y el formulario se cerrará. Continúa al hexágono siguiente asignado y repite el procedimiento.
+
+14. Inserta una etiqueta en el frasco. Lo mínimo que deberías incluir es: código del hexágono, tus nombres y apellidos, fecha. Si puedes, añade coordenadas del centroide del hexágono en grados y grados decimales (e.g. 18.23424$^\circ$, -71.82321$^\circ$).
 
 Un cálculo preliminar sugiere que te tomará 1 hora muestrear cada hexágono. El primero probablemente te tomará más tiempo, pero no se trata de correr, se trata de aprender.
 
@@ -355,7 +357,7 @@ Si no lo has hecho aún, abre tu celular, actívale el GPS, y otórgale permisos
 
 10. Cuando alcances la última medición en el último radio, podrás cerrar el formulario. Para ello, presiona "Siguiente", responde "No agregar" cuando pregunte si deseas agregar nuevo clasto.
 
-11. La última pregunta del formulario es sobre observaciones. Si tienes alguna que añadir, este es el momento. De lo contrario, presiona siguiente y guarda tu formulario. Puedes marcarlo como finalizado y enviarlo si lo deseas. También puede desmarcar la casilla de "Finalizado", si tienes previsto revisarlo más adelante. Presiona guardar y el formulario se cerrará. En el último radio, cierra el formulario y continúa al hexágono siguiente asignado.
+11. La última pregunta del formulario es sobre observaciones. Si tienes alguna que añadir, este es el momento. De lo contrario, presiona siguiente y guarda tu formulario. Puedes marcarlo como finalizado y enviarlo si lo deseas. También puede desmarcar la casilla de "Finalizado", si tienes previsto revisarlo más adelante; pero no olvides subir tu formulario al servidor tan pronto como puedas. Presiona guardar y el formulario se cerrará. Continúa al hexágono siguiente asignado y repite el procedimiento.
 
 Un cálculo preliminar sugiere que te tomará 1 hora muestrear cada hexágono. El primero probablemente te tomará más tiempo, pero no se trata de correr, se trata de aprender.
 
@@ -386,8 +388,6 @@ Considera evaluar las siguientes aplicacione. Ssólo las dos primeras son requer
 -   Mapas en el celular: [SW Maps](https://play.google.com/store/apps/details?id=np.com.softwel.swmaps)
 
 -   Para identificación de especies, reporte, ciencia ciudadana. Créate una cuenta: [iNaturalist](https://www.inaturalist.org/)
-
--   Para identificación de especies: [Picture This](https://play.google.com/store/apps/details?id=cn.danatech.xingseus)
 
 -   Ciencia ciudadana, monitoreo y conservaciónde bosque: [Forest Watcher](https://play.google.com/store/apps/details?id=com.forestwatcher)
 
